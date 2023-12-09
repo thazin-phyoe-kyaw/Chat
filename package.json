@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:up": "docker-compose up -d && prisma migrate dev --name init --schema ./prisma/schema.prisma",
+    "migration": "prisma migrate dev --name init --schema ./prisma/schema.prisma",
+    "docker:down": "docker-compose down"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
