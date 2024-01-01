@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server'
-export function middleware(request) {
-  return NextResponse.redirect(new URL('/home', request.url))
-}
+import { authMiddleware } from "@clerk/nextjs";
+
+export default authMiddleware({
+  publicRoutes: ["/api/uploadthing"],
+});
+
 export const config = {
-  matcher: '/about/:path*',
-}
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+};
