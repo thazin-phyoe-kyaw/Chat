@@ -1,24 +1,27 @@
-import { FileIcon, X } from "lucide-react";
+import { FileIcon, Camera } from "lucide-react";
 import Image from "next/image";
 
 import { UploadDropzone } from "@/lib/uploadthing";
 
 import "@uploadthing/react/styles.css";
-import { Button } from "./ui/button";
-
 export const FileUpload = ({ onChange, value, endpoint }) => {
   const fileType = value?.split(".").pop();
-
   if (value && fileType !== "pdf") {
     return (
-      <div className="relative h-20 w-20">
-        <Image fill src={value} alt="Upload" className="rounded-full" />
+      <div className=" relative h-15 w-15">
+        <Image
+          src={value}
+          alt="Upload"
+          className="rounded-full"
+          width={100}
+          height={100}
+        />
         <button
           onClick={() => onChange("")}
           className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
           type="button"
         >
-          <X className="h-4 w-4" />
+          <Camera className="h-4 w-4" />
         </button>
       </div>
     );
