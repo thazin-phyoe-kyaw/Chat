@@ -1,9 +1,7 @@
 "use client";
-
 import axios from "axios";
 import { Check, Copy, RefreshCw } from "lucide-react";
 import { useState } from "react";
-
 import {
   Dialog,
   DialogContent,
