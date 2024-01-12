@@ -9,9 +9,9 @@ import { db } from "@/lib/db";
 
 import { ServerHeader } from "./server-header";
 import { ServerSearch } from "./server-search";
-import { ServerSection } from "./server-section";
 import { ServerChannel } from "./server-channel";
 import { ServerMember } from "./server-member";
+import { ServerSection } from "./server-section";
 
 const iconMap = {
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
@@ -79,7 +79,6 @@ export const ServerSidebar = async ({ serverId }) => {
   return (
     <div className="flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]">
       <ServerHeader server={server} role={role} />
-      {/* <ServerHeader server={server} role={role} />
       <ScrollArea className="flex-1 px-3">
         <div className="mt-2">
           <ServerSearch
@@ -124,6 +123,7 @@ export const ServerSidebar = async ({ serverId }) => {
           />
         </div>
         <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
+
         {!!textChannels?.length && (
           <div className="mb-2">
             <ServerSection
@@ -199,7 +199,7 @@ export const ServerSidebar = async ({ serverId }) => {
             </div>
           </div>
         )}
-      </ScrollArea> */}
+      </ScrollArea>
     </div>
   );
 };

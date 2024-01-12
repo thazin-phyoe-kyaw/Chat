@@ -51,8 +51,7 @@ export const CreateServerModal = () => {
 
   const onSubmit = async (values) => {
     try {
-      await axios.post("/api/servers", values);
-
+      await axios.post("/api/servers/createServer", values);
       form.reset();
       router.refresh();
       onClose();
