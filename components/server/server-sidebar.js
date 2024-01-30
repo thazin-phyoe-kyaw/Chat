@@ -39,12 +39,12 @@ export const ServerSidebar = async ({ serverId }) => {
       id: serverId,
     },
     include: {
-      Channel: {
+      channels: {
         orderBy: {
           createdAt: "asc",
         },
       },
-      Member: {
+      members: {
         include: {
           profile: true,
         },
@@ -55,16 +55,16 @@ export const ServerSidebar = async ({ serverId }) => {
     },
   });
 
-  const textChannels = server?.Channel.filter(
+  const textChannels = server?.channels.filter(
     (channel) => channel.type === ChannelType.TEXT
   );
-  const audioChannels = server?.Channel.filter(
+  const audioChannels = server?.channels.filter(
     (channel) => channel.type === ChannelType.AUDIO
   );
-  const videoChannels = server?.Channel.filter(
+  const videoChannels = server?.channels.filter(
     (channel) => channel.type === ChannelType.VIDEO
   );
-  const members = server?.Member.filter(
+  const members = server?.members.filter(
     (member) => member.profileId !== profile.id
   );
 
@@ -72,7 +72,7 @@ export const ServerSidebar = async ({ serverId }) => {
     return redirect("/");
   }
 
-  const role = server.Member.find(
+  const role = server.members.find(
     (member) => member.profileId === profile.id
   )?.role;
 

@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/components/provider/modal-provider";
+import { SocketProvider } from "@/components/provider/socket-provider";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -21,8 +22,10 @@ export default function RootLayout({ children }) {
             defaultTheme="dark"
             enableSystem={false}
           >
-            <ModalProvider></ModalProvider>
-            {children}
+            <SocketProvider>
+              <ModalProvider></ModalProvider>
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
