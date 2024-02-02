@@ -27,7 +27,7 @@ export async function POST(req) {
     const server = await db.server.update({
       where: {
         id: serverId,
-        Member: {
+        members: {
           some: {
             profileId: profile.id,
             role: {
@@ -37,7 +37,7 @@ export async function POST(req) {
         },
       },
       data: {
-        Channel: {
+        channels: {
           create: {
             profileId: profile.id,
             name,

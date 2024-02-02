@@ -15,16 +15,16 @@ export const useSocket = () => {
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
-  console.log("first");
-  console.log(socket);
+
   useEffect(() => {
-    const socketInstance = new ClientIO(process.env.NEXT_PUBLIC_SITE_URL, {
-      path: "pages/api/socket/io",
+    const socketInstance = new ClientIO({
+      path: "/api/socket/io",
       addTrailingSlash: false,
     });
-
+    console.log("socketInstance", socketInstance);
     socketInstance.on("connect", () => {
       setIsConnected(true);
+      console.log("Connected to socket.io server");
     });
 
     socketInstance.on("disconnect", () => {
@@ -37,8 +37,7 @@ export const SocketProvider = ({ children }) => {
       socketInstance.disconnect();
     };
   }, []);
-  console.log(socket);
-  console.log(isConnected);
+  console.log("isConnected", isConnected);
   return (
     <SocketContext.Provider value={{ socket, isConnected }}>
       {children}

@@ -26,7 +26,7 @@ export async function DELETE(req, { params }) {
     const server = await db.server.update({
       where: {
         id: serverId,
-        Member: {
+        members: {
           some: {
             profileId: profile.id,
             role: {
@@ -36,7 +36,7 @@ export async function DELETE(req, { params }) {
         },
       },
       data: {
-        Channel: {
+        channels: {
           delete: {
             id: params.channelId,
             name: {
@@ -81,7 +81,7 @@ export async function PATCH(req, { params }) {
     const server = await db.server.update({
       where: {
         id: serverId,
-        Member: {
+        members: {
           some: {
             profileId: profile.id,
             role: {
@@ -91,7 +91,7 @@ export async function PATCH(req, { params }) {
         },
       },
       data: {
-        Channel: {
+        channels: {
           update: {
             where: {
               id: params.channelId,

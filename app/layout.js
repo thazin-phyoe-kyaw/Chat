@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/components/provider/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/components/provider/modal-provider";
 import { SocketProvider } from "@/components/provider/socket-provider";
-
+import { QueryProvider } from "@/components/provider/query-provider";
 const inter = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
@@ -23,8 +23,8 @@ export default function RootLayout({ children }) {
             enableSystem={false}
           >
             <SocketProvider>
-              <ModalProvider></ModalProvider>
-              {children}
+              <ModalProvider />
+              <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>

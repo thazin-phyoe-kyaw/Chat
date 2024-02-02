@@ -1,18 +1,20 @@
 "use client";
-
-import * as z from "zod";
+import z from "zod";
 import axios from "axios";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Smile, SmileIcon } from "lucide-react";
+
 import { useRouter } from "next/navigation";
 
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-// import { EmojiPicker } from "@/components/emoji-picker";
 import { useModal } from "@/app/hooks/use-modal-store";
+import { PlusCircle } from "lucide-react";
+import { EmojiPicker } from "../emoji-picker";
+
+// import { useModal } from "@/hooks/use-modal-store";
+// import EmojiPicker from "@/components/emoji-picker";
 
 const formSchema = z.object({
   content: z.string().min(1),
@@ -29,7 +31,7 @@ export const ChatInput = ({ apiUrl, query, name, type }) => {
     },
   });
 
-  const isLoading = form.formState?.isSubmitting || false;
+  const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values) => {
     console.log(values);
@@ -49,8 +51,8 @@ export const ChatInput = ({ apiUrl, query, name, type }) => {
   };
 
   return (
-    <Form {...form} onSubmit={form.handleSubmit(onSubmit)}>
-      <form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="content"
@@ -63,7 +65,7 @@ export const ChatInput = ({ apiUrl, query, name, type }) => {
                     onClick={() => onOpen("messageFile", { apiUrl, query })}
                     className="absolute top-7 left-8 h-[24px] w-[24px] bg-zinc-500 dark:bg-zinc-400 hover:bg-zinc-600 dark:hover:bg-zinc-300 transition rounded-full p-1 flex items-center justify-center"
                   >
-                    <Plus className="text-white dark:text-[#313338]" />
+                    <PlusCircle className="text-white dark:text-[#313338]" />
                   </button>
                   <Input
                     disabled={isLoading}
@@ -74,12 +76,11 @@ export const ChatInput = ({ apiUrl, query, name, type }) => {
                     {...field}
                   />
                   <div className="absolute top-7 right-8">
-                    <SmileIcon />
-                    {/* <EmojiPicker
-                        onChange={(emoji) =>
-                          field.onChange(`${field.value} ${emoji}`)
-                        }
-                      /> */}
+                    <EmojiPicker
+                      onChange={(emoji) =>
+                        field.onChange(`${field.value} ${emoji}`)
+                      }
+                    />
                   </div>
                 </div>
               </FormControl>

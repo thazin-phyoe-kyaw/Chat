@@ -6,9 +6,12 @@ import { currentProfile } from "@/lib/current-profile";
 import { ChatHeader } from "@/components/chat/chat-header";
 // import { ChatInput } from "@/components/chat/chat-input";
 // import { ChatMessages } from "@/components/chat/chat-messages";
-// import { MediaRoom } from "@/components/media-room";
+import { MediaRoom } from "@/components/media-room";
 import { db } from "@/lib/db";
+import { ChatInput } from "@/components/chat/chat-input";
+import { ChatMessages } from "@/components/chat/chat-messages";
 
+ChatInput;
 const ChannelIdPage = async ({ params }) => {
   const profile = await currentProfile();
 
@@ -42,8 +45,7 @@ const ChannelIdPage = async ({ params }) => {
       />
       {channel.type === ChannelType.TEXT && (
         <>
-          "hi"
-          {/* <ChatMessages
+          <ChatMessages
             member={member}
             name={channel.name}
             chatId={channel.id}
@@ -56,8 +58,8 @@ const ChannelIdPage = async ({ params }) => {
             }}
             paramKey="channelId"
             paramValue={channel.id}
-          /> */}
-          {/* <ChatInput
+          />
+          <ChatInput
             name={channel.name}
             type="channel"
             apiUrl="/api/socket/messages"
@@ -65,17 +67,15 @@ const ChannelIdPage = async ({ params }) => {
               channelId: channel.id,
               serverId: channel.serverId,
             }}
-          /> */}
+          />
         </>
       )}
-      {
-        channel.type === ChannelType.AUDIO && "hi"
-        // <MediaRoom chatId={channel.id} video={false} audio={true} />
-      }
-      {
-        channel.type === ChannelType.VIDEO && "hi"
-        // <MediaRoom chatId={channel.id} video={true} audio={true} />
-      }
+      {channel.type === ChannelType.AUDIO && (
+        <MediaRoom chatId={channel.id} video={false} audio={true} />
+      )}
+      {channel.type === ChannelType.VIDEO && (
+        <MediaRoom chatId={channel.id} video={true} audio={true} />
+      )}
     </div>
   );
 };
