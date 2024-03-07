@@ -39,7 +39,6 @@ const formSchema = z.object({
 export const EditServerModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
-
   const isModalOpen = isOpen && type === "editServer";
   const { server } = data;
 
@@ -62,8 +61,7 @@ export const EditServerModal = () => {
 
   const onSubmit = async (values) => {
     try {
-      await axios.patch(`/api/servers/${server?.id}`, values);
-
+      await axios.patch(`/api/servers/${server?.id}/updateServer`, values);
       form.reset();
       router.refresh();
       onClose();
@@ -108,7 +106,6 @@ export const EditServerModal = () => {
                   )}
                 />
               </div>
-
               <FormField
                 control={form.control}
                 name="name"

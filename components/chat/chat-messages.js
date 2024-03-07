@@ -4,9 +4,7 @@ import { Fragment, useRef, ElementRef } from "react";
 import { ChatWelcome } from "./chat-welcome";
 import { format } from "date-fns";
 import { Member, Message, Profile } from "@prisma/client";
-import { Loader2, ServerCrash } from "lucide-react";
-
-// import { ChatItem } from "./chat-item";
+import { BookText, Loader2, ServerCrash } from "lucide-react";
 import { useChatQuery } from "@/app/hooks/use-chat-query";
 import { useChatScroll } from "@/app/hooks/use-chat-scroll";
 import { useChatSocket } from "@/app/hooks/use-chat-scoket";
@@ -27,12 +25,11 @@ export const ChatMessages = ({
   type,
 }) => {
   const queryKey = `chat:${chatId}`;
+  console.log(queryKey, "QKEY");
   const addKey = `chat:${chatId}:messages`;
   const updateKey = `chat:${chatId}:messages:update`;
-
   const chatRef = useRef(null);
   const bottomRef = useRef(null);
-
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useChatQuery({
       queryKey,
@@ -40,6 +37,7 @@ export const ChatMessages = ({
       paramKey,
       paramValue,
     });
+
   useChatSocket({ queryKey, addKey, updateKey });
   useChatScroll({
     chatRef,
@@ -70,7 +68,7 @@ export const ChatMessages = ({
       </div>
     );
   }
-  console.log(data);
+
   return (
     <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
       {!hasNextPage && <div className="flex-1" />}

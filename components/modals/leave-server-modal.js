@@ -27,9 +27,7 @@ export const LeaveServerModal = () => {
   const onClick = async () => {
     try {
       setIsLoading(true);
-
-      await axios.patch(`/api/servers/${server?.id}/leave`);
-
+      await axios.patch(`/api/servers/${server?.id}/leaveServer`);
       onClose();
       router.refresh();
       router.push("/");

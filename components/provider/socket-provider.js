@@ -11,7 +11,6 @@ const SocketContext = createContext({
 export const useSocket = () => {
   return useContext(SocketContext);
 };
-
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -21,10 +20,8 @@ export const SocketProvider = ({ children }) => {
       path: "/api/socket/io",
       addTrailingSlash: false,
     });
-    console.log("socketInstance", socketInstance);
     socketInstance.on("connect", () => {
       setIsConnected(true);
-      console.log("Connected to socket.io server");
     });
 
     socketInstance.on("disconnect", () => {
@@ -37,7 +34,6 @@ export const SocketProvider = ({ children }) => {
       socketInstance.disconnect();
     };
   }, []);
-  console.log("isConnected", isConnected);
   return (
     <SocketContext.Provider value={{ socket, isConnected }}>
       {children}

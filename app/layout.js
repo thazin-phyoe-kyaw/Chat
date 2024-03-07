@@ -8,6 +8,7 @@ import { QueryProvider } from "@/components/provider/query-provider";
 const inter = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
+  manifest: "/manifest.json",
   title: "Discord Clone",
   description: "Discord Clone build by Thazin Phyoe Kyaw",
 };

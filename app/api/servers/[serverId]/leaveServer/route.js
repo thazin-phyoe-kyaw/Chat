@@ -21,14 +21,14 @@ export async function PATCH(req, { params }) {
         profileId: {
           not: profile.id,
         },
-        Member: {
+        members: {
           some: {
             profileId: profile.id,
           },
         },
       },
       data: {
-        Member: {
+        members: {
           deleteMany: {
             profileId: profile.id,
           },
@@ -38,6 +38,7 @@ export async function PATCH(req, { params }) {
 
     return NextResponse.json(server);
   } catch (error) {
-    return new NextResponse("Internal Error", { status: 500 });
+    console.log(error);
+    return new NextResponse("Internal Server  Error", { status: 500 });
   }
 }

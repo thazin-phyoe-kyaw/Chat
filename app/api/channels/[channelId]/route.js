@@ -49,7 +49,6 @@ export async function DELETE(req, { params }) {
 
     return NextResponse.json(server);
   } catch (error) {
-    console.log("[CHANNEL_ID_DELETE]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

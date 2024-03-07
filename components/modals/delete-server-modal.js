@@ -27,15 +27,11 @@ export const DeleteServerModal = () => {
   const onClick = async () => {
     try {
       setIsLoading(true);
-
-      await axios.delete(`/api/servers/${server?.id}`);
-
+      await axios.delete(`/api/servers/${server?.id}/deleteServer`);
       onClose();
-
       router.refresh();
       router.push("/");
     } catch (error) {
-      console.log(error);
     } finally {
       setIsLoading(false);
     }

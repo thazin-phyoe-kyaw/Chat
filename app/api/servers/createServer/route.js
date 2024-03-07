@@ -6,7 +6,6 @@ import { db } from "@/lib/db";
 export async function POST(req) {
   try {
     const { name, imageUrl } = await req.json();
-    console.log(name);
     const profile = await currentProfile();
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -18,17 +17,16 @@ export async function POST(req) {
         imageUrl,
         inviteCode: uuidv4(),
         channels: {
-          create: [{ name: "general", profileId: profile.id }],
+          create: [{ profileId: profile.id, name: "general" }],
         },
         members: {
           create: [{ profileId: profile.id, role: MemberRole.ADMIN }],
         },
       },
     });
-    console.log(server);
+
     return NextResponse.json(server);
   } catch (error) {
-    console.log(error);
-    return new NextResponse("Internal Error", { status: 500 });
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

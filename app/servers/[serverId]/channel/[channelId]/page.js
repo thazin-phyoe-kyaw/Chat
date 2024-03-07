@@ -1,17 +1,12 @@
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { ChannelType } from "@prisma/client";
-
 import { currentProfile } from "@/lib/current-profile";
 import { ChatHeader } from "@/components/chat/chat-header";
-// import { ChatInput } from "@/components/chat/chat-input";
-// import { ChatMessages } from "@/components/chat/chat-messages";
 import { MediaRoom } from "@/components/media-room";
 import { db } from "@/lib/db";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessages } from "@/components/chat/chat-messages";
-
-ChatInput;
 const ChannelIdPage = async ({ params }) => {
   const profile = await currentProfile();
 
@@ -24,14 +19,14 @@ const ChannelIdPage = async ({ params }) => {
       id: params.channelId,
     },
   });
-
+  console.log(channel, "CHANNEL IN CHANDDEL ID PAGE.js");
   const member = await db.Member.findFirst({
     where: {
       serverId: params.serverId,
       profileId: profile.id,
     },
   });
-
+  console.log(member, "member in channelId page.js");
   if (!channel || !member) {
     redirect("/");
   }

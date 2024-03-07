@@ -13,7 +13,6 @@ const ioHandler = (req, res) => {
     const httpServer = res.socket.server;
     const io = new ServerIO(httpServer, {
       path: path,
-      // @ts-ignore
       addTrailingSlash: false,
     });
     res.socket.server.io = io;
