@@ -4,6 +4,7 @@ import { Member, Message, Profile } from "@prisma/client";
 import { useSocket } from "@/components/provider/socket-provider";
 export const useChatSocket = ({ addKey, updateKey, queryKey }) => {
   const { socket } = useSocket();
+  console.log(socket, "SOCKET in use_chat_socket");
   const queryClient = useQueryClient();
 
   useEffect(() => {
